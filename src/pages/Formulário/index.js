@@ -1,14 +1,13 @@
 import { Container, StyledTextField } from "./styles";
 import * as yup from "yup";
 import { Button } from "@material-ui/core";
-import { useHistory } from "react-router";
+import { Redirect } from "react-router";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useState } from "react";
 
-function Form({ setTransactions }) {
-  const [saidas, setSaidas] = useState([]);
-  const [entradas, setEntradas] = useState([]);
+function Form({ transactions, setTransactions }) {
+  const [redirect, setRedirect] = useState(false);
   const schema = yup.object().shape({
     name: yup
       .string()
@@ -32,16 +31,19 @@ function Form({ setTransactions }) {
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
 
-  const history = useHistory();
-
   const onSubmitFunction = (data) => {
-    data.quantity > 0
-      ? setEntradas(...entradas, data)
-      : setSaidas(...saidas, data);
-    setTransactions(entradas);
-    setTransactions(saidas);
-    history.push("/transactions");
+    const newData = {
+      name: data.name,
+      quantity: data.quantity,
+      price: data.price,
+    };
+    setTransactions([...transactions, newData]);
+    setRedirect(true);
   };
+
+  if (redirect) {
+    return <Redirect to="/transactions" />;
+  }
 
   return (
     <Container onSubmit={handleSubmit(onSubmitFunction)}>

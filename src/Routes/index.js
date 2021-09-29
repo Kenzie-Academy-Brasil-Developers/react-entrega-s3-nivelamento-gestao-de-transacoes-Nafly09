@@ -6,7 +6,7 @@ export const Routes = ({ transactions, setTransactions }) => {
   return (
     <Switch>
       <Route exact path="/">
-        <Form setTransactions={setTransactions} />
+        <Form transactions={transactions} setTransactions={setTransactions} />
       </Route>
       <Route path="/transactions">
         <AllTransactions transactions={transactions} />
