@@ -17,7 +17,6 @@ function Form({ transactions, setTransactions }) {
     quantity: yup
       .number()
       .typeError("O valor precisa ser um número")
-      .positive(true, "O Valor não pode ser negativo")
       .required("Campo Obrigatório"),
     price: yup
       .number()
