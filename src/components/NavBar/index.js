@@ -30,6 +30,32 @@ function NavBar({ changePage }) {
             Transações
           </Typography>
         </IconButton>
+        <IconButton
+          edge="start"
+          color="inherit"
+          aria-label="outs"
+          sx={{ mr: 2 }}
+          onClick={() => {
+            changePage("/outs");
+          }}
+        >
+          <Typography variant="h6" color="inherit" component="div">
+            Saídas
+          </Typography>
+        </IconButton>
+        <IconButton
+          edge="start"
+          color="inherit"
+          aria-label="ins"
+          sx={{ mr: 2 }}
+          onClick={() => {
+            changePage("/ins");
+          }}
+        >
+          <Typography variant="h6" color="inherit" component="div">
+            Entradas
+          </Typography>
+        </IconButton>
       </Toolbar>
     </AppBar>
   );
