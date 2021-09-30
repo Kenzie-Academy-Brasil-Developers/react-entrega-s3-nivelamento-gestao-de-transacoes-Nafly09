@@ -16,10 +16,6 @@ export default createGlobalStyle`
     --blue: #347EDA;
 }
 
-body {
-    background-color: var(--blue);
-}
-
 #root{
     display: flex;
     flex-direction: column;

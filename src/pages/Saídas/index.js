@@ -1,4 +1,5 @@
 import { useHistory } from "react-router-dom";
+import { Container } from "./styles";
 import NavBar from "../../components/NavBar";
 
 function Saídas({ transactions }) {
@@ -13,19 +14,21 @@ function Saídas({ transactions }) {
   return (
     <>
       <NavBar changePage={changePage} />
-      <h1>Saídas</h1>
-      <ul>
-        {outs.map((products, index) => {
-          return (
-            <li key={index}>
-              Nome: {products.name}, qtd: {products.quantity}, valor: R$
-              {products.price}
-            </li>
-          );
-        })}
-      </ul>
-      <h3>Valor total de saída: R${getTotalValue.toFixed(2)}</h3>
-      <h3>Quantidade de itens total de saída: {outs.length}</h3>
+      <Container>
+        <h1>Saídas</h1>
+        <ul>
+          {outs.map((products, index) => {
+            return (
+              <li key={index}>
+                Nome: {products.name}, qtd: {products.quantity}, valor: R$
+                {products.price}
+              </li>
+            );
+          })}
+        </ul>
+        <h3>Valor total de saída: R${getTotalValue.toFixed(2)}</h3>
+        <h3>Quantidade de itens total de saída: {outs.length}</h3>
+      </Container>
     </>
   );
 }
