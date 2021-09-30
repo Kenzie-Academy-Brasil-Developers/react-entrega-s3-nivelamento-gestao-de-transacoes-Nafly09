@@ -1,7 +1,8 @@
 import { Container, StyledTextField } from "./styles";
+import NavBar from "../../components/NavBar";
 import * as yup from "yup";
 import { Button } from "@material-ui/core";
-import { Redirect } from "react-router";
+import { Redirect, useHistory } from "react-router";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useState } from "react";
@@ -25,6 +26,8 @@ function Form({ transactions, setTransactions }) {
       .required("Campo Obrigatório"),
   });
 
+  const history = useHistory();
+
   const {
     register,
     handleSubmit,
@@ -44,36 +47,42 @@ function Form({ transactions, setTransactions }) {
   if (redirect) {
     return <Redirect to="/transactions" />;
   }
+  const changePage = (url) => {
+    return history.push(url);
+  };
 
   return (
-    <Container onSubmit={handleSubmit(onSubmitFunction)}>
-      <StyledTextField
-        variant="outlined"
-        label="Nome do Produto"
-        {...register("name")}
-        error={!!errors.name}
-        helperText={errors.name?.message}
-      />
+    <>
+      <NavBar changePage={changePage} />
+      <Container onSubmit={handleSubmit(onSubmitFunction)}>
+        <StyledTextField
+          variant="outlined"
+          label="Nome do Produto"
+          {...register("name")}
+          error={!!errors.name}
+          helperText={errors.name?.message}
+        />
 
-      <StyledTextField
-        variant="outlined"
-        label="Quantidade"
-        {...register("quantity")}
-        error={!!errors.quantity}
-        helperText={errors.quantity?.message}
-      />
+        <StyledTextField
+          variant="outlined"
+          label="Quantidade"
+          {...register("quantity")}
+          error={!!errors.quantity}
+          helperText={errors.quantity?.message}
+        />
 
-      <StyledTextField
-        variant="outlined"
-        label="Preço"
-        {...register("price")}
-        error={!!errors.price}
-        helperText={errors.price?.message}
-      />
-      <Button variant="contained" type="submit">
-        Enviar
-      </Button>
-    </Container>
+        <StyledTextField
+          variant="outlined"
+          label="Preço"
+          {...register("price")}
+          error={!!errors.price}
+          helperText={errors.price?.message}
+        />
+        <Button variant="contained" type="submit">
+          Enviar
+        </Button>
+      </Container>
+    </>
   );
 }
 
