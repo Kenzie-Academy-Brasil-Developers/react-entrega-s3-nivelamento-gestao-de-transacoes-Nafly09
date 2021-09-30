@@ -21,6 +21,7 @@ function Entradas({ transactions }) {
           );
         })}
       </ul>
+      <h3>Quantidade de itens total de entrada: {ins.length}</h3>
     </>
   );
 }

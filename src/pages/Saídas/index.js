@@ -3,6 +3,9 @@ import NavBar from "../../components/NavBar";
 
 function Saídas({ transactions }) {
   const outs = transactions.filter((transaction) => transaction.quantity < 0);
+  const getTotalValue = outs
+    .map((transactions) => transactions.price)
+    .reduce((a, b) => a + b, 0);
   const history = useHistory();
   const changePage = (url) => {
     return history.push(url);
@@ -21,6 +24,8 @@ function Saídas({ transactions }) {
           );
         })}
       </ul>
+      <h3>Valor total de saída: R${getTotalValue.toFixed(2)}</h3>
+      <h3>Quantidade de itens total de saída: {outs.length}</h3>
     </>
   );
 }
